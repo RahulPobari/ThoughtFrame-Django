@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block title %}Delete | ThoughtFrame{% endblock %}
+
+{% block content %}
+<!-- Center the card in the available space of the site-content (above footer) -->
+<div class="centered-wrapper">
+  <div class="form-container">
+    <h2 class="form-title danger-text">⚠️ Confirm Deletion</h2>
+    <p class="confirm-message">Are you sure you want to permanently delete this thought?</p>
+    <form method="post" class="styled-form">
+      {% csrf_token %}
+      <button type="submit" class="btn delete-btn">🗑️ Yes, Delete</button>
+      <a href="{% url 'tweet_list' %}" class="back-link">Cancel</a>
+    </form>
+  </div>
+</div>
+
+<style>
+  .centered-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 650px; /* Prevents overflow when inside a flex parent */
+  }
+
+  .form-container {
+    max-width: 500px;
+    padding: 2rem;
+    background: #2b1b1b;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    color: #f1f1f1;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+
+  .form-title.danger-text {
+    color: #ff6b6b;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .confirm-message {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: #ddd;
+  }
+
+  .btn.delete-btn {
+    padding: 0.8rem 1.2rem;
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 1rem;
+  }
+
+  .btn.delete-btn:hover {
+    background: #fa5252;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #ccc;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #fff;
+  }
+</style>
+{% endblock %}

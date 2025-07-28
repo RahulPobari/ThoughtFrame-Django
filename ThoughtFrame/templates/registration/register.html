@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block title %}Register | ThoughtFrame{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>Create an Account</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="cta-button">Register</button>
+  </form>
+  <p class="switch-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+<style>
+  .form-container {
+    max-width: 400px;
+    background-color: #1f1f2f;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 4rem auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    color: #fff;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #61dafb;
+  }
+
+  .form-container form p {
+    margin-bottom: 1rem;
+  }
+
+  .form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .form-container input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #333;
+    color: #eee;
+    margin-bottom: 1rem;
+  }
+
+  .form-container input:focus {
+    outline: 2px solid #61dafb;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #61dafb;
+    color: #111;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #44c7ff;
+  }
+
+  .switch-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+
+  .switch-link a {
+    color: #61dafb;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}

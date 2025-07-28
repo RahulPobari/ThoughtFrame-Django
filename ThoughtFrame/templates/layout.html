@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}ThoughtFrame{% endblock %}</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f1117;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: #64ffda;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #1de9b6;
+    }
+
+    .wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main.container {
+  flex: 1;
+}
+
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #1c1e26;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00bcd4, #3f51b5);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #1de9b6, #1e88e5);
+      transform: scale(1.05);
+    }
+
+    .btn.danger {
+      background: linear-gradient(135deg, #e53935, #b71c1c);
+    }
+
+    .btn.danger:hover {
+      background: linear-gradient(135deg, #ff5252, #d32f2f);
+    }
+
+    header {
+      background: #121212;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #222;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #64ffda;
+      letter-spacing: 1px;
+    }
+
+    .nav-links,
+    .auth-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      color: #cfd8dc;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: #2e2e2e;
+    }
+
+    .auth-links .username {
+      font-weight: bold;
+      color: #1de9b6;
+    }
+
+    form.logout-form {
+      display: inline;
+    }
+
+    .form-container {
+      background: #1c1e26;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #2b2d3a;
+      color: #ffffff;
+    }
+
+    form input:focus, form textarea:focus {
+      outline: 2px solid #00acc1;
+      background-color: #333545;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #90caf9;
+    }
+
+    footer {
+      margin-top: auto;
+      background: #111;
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .container {
+        margin: 1rem;
+      }
+
+      .nav-links,
+      .auth-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Navbar -->
+    <header>
+      <nav>
+        <div class="logo">ThoughtFrame 🧠</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+          <div class="nav-links">
+            <a href="{% url 'tweet_list' %}">📝 Tweets</a>
+            <a href="{% url 'tweet_create' %}">➕ New</a>
+            <a href="/">🏠 Home</a>
+          </div>
+          <div class="auth-links">
+            {% if user.is_authenticated %}
+              <span class="username">👋 {{ user.username }}</span>
+              <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="btn">Logout</button>
+              </form>
+            {% else %}
+              <a href="{% url 'login' %}" class="btn">Login</a>
+              <a href="{% url 'register' %}" class="btn">Register</a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      ThoughtFrame &copy; {{ now|date:"Y" }}. Built with 💡 by You.
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center;">You have been logged out.</h2>
+<a href="{% url 'login' %}" class="cta-button">Login Again</a>
+{% endblock %}

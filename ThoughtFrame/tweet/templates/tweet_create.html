@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Tweet | ThoughtFrame{% endblock %}
+
+{% block content %}
+  <div class="tweet-container">
+    <h2 class="tweet-title">📝 Compose Your Thought</h2>
+    
+    <form method="POST" enctype="multipart/form-data" class="tweet-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="tweet-btn">Post Tweet 🚀</button>
+    </form>
+    
+    <a class="back-link" href="{% url 'tweet_list' %}">← Back to Tweets</a>
+  </div>
+
+  <style>
+    .tweet-container {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #1e1e2f;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .tweet-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #61dafb;
+    }
+
+    .tweet-form p {
+      margin-bottom: 1rem;
+    }
+
+    .tweet-form input[type="text"],
+    .tweet-form input[type="file"],
+    .tweet-form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #2d2d3f;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .tweet-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .tweet-btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, #61dafb, #44c7ff);
+      border: none;
+      color: #1e1e2f;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tweet-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+  </style>
+{% endblock %}

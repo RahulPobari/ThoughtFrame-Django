@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}Edit | ThoughtFrame{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2 class="form-title">✏️ Edit Your Thought</h2>
+  <form method="post" enctype="multipart/form-data" class="styled-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn update-btn">💾 Update</button>
+  </form>
+  <a href="{% url 'tweet_list' %}" class="back-link">← Back to Feed</a>
+</div>
+
+<style>
+  .form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #1e1e2f;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #ffa94d;
+  }
+
+  .styled-form p {
+    margin-bottom: 1rem;
+  }
+
+  .styled-form input[type="text"],
+  .styled-form input[type="file"],
+  .styled-form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #2d2d3f;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .styled-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .btn.update-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: #ffa94d;
+    border: none;
+    color: #1e1e2f;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s;
+  }
+
+  .btn.update-btn:hover {
+    background: #ffc078;
+  }
+
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #ccc;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #fff;
+  }
+</style>
+{% endblock %}
